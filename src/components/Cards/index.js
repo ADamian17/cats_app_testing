@@ -1,12 +1,16 @@
 import React from 'react'
 
-import { CardGroup } from 'react-bootstrap'
+import { Row } from 'react-bootstrap'
 
-const Cards = (props) => {
+import CardComponent from '../Card'
+
+const Cards = ({ cats }) => {
   return(
-    <CardGroup>
-      Cards
-    </CardGroup>
+    <Row className='mt-5'>
+      {
+        cats.map((cat, idx) => <CardComponent key={`${Date.now()}-${idx}`} {...cat} />)
+      }
+    </Row>
   )
 }
 
