@@ -6,7 +6,7 @@ import CardComponent from '../Card'
 
 const Cards = ({ cats }) => {
   return(
-    <Row className='mt-5'>
+    <Row>
       {
         cats.map((cat, idx) => <CardComponent key={`${Date.now()}-${idx}`} {...cat} />)
       }

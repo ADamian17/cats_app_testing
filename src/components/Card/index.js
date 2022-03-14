@@ -11,9 +11,7 @@ const CardComponent = ({name, phone, email, image, favoured}) => {
     <Col>
       <Card
         data-testid="card" 
-        className='shadow-sm'
-        style={{ width: '18rem' }}>
-          
+        className='shadow-sm'>
         <Card.Img 
           variant='top' 
           src={image.url} 
