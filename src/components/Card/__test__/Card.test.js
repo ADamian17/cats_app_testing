@@ -5,6 +5,7 @@ import CardComponent from "..";
 
 describe('Card Component', () => {
   const cardProps = {
+    idx: 1,
     name: 'jax',
     phone: '111-111-1111',
     email: 'jax@gmail.com',
@@ -12,7 +13,8 @@ describe('Card Component', () => {
       url: 'https://images.unsplash.com/photo-1529778873920-4da4926a72c2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGNhdHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60',
       alt: 'cute cat'
     },
-    favoured: false
+    favoured: false,
+    updateFavorite: () => {}
   }
   test('should show card heading', () => {
     render(<CardComponent {...cardProps} />)

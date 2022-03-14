@@ -1,11 +1,26 @@
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
 import { Card, Button, Col } from 'react-bootstrap';
+import { PetsContext } from '../Pets';
 
 import Heart from '../SvgIcons/Heart';
 import HeartRed from '../SvgIcons/HeartRed';
 
-const CardComponent = ({name, phone, email, image, favoured}) => {
+const CardComponent = ({name, phone, email, image, favoured, idx}) => {
+  const { cats, setCats } = useContext(PetsContext);
   const [isFavoured, setIsFavoured] = useState(favoured);
+
+  const updateFavorite = (idx, favoured) => {
+    const updatedCats = [...cats];
+
+    // eslint-disable-next-line no-unused-expressions
+    updatedCats[idx].favoured = favoured;
+    setCats(updatedCats);
+  }
+
+  const toggleFav = () => {
+    updateFavorite(idx, !favoured);
+    return setIsFavoured(!isFavoured);
+  }
 
   return(
     <Col>
@@ -24,7 +39,7 @@ const CardComponent = ({name, phone, email, image, favoured}) => {
           <Card.Text data-testid="card-copy">{email}</Card.Text>
 
           <Button
-            onClick={() => setIsFavoured(!isFavoured)} 
+            onClick={toggleFav} 
             variant="outline-secondary" 
             data-testid="card-btn-fav">
             {

@@ -1,14 +1,23 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 import { Row } from 'react-bootstrap'
 
 import CardComponent from '../Card'
 
-const Cards = ({ cats }) => {
+import { PetsContext } from '../Pets'
+
+const Cards = () => {
+  const { cats } = useContext(PetsContext);
+
   return(
     <Row>
       {
-        cats.map((cat, idx) => <CardComponent key={`${Date.now()}-${idx}`} {...cat} />)
+        cats.map((cat, idx) => (
+          <CardComponent
+            idx={idx} 
+            key={`${Date.now()}-${idx}`} 
+            {...cat} />)
+        )
       }
     </Row>
   )

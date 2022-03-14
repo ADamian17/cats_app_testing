@@ -4,9 +4,9 @@ import userEvent from "@testing-library/user-event";
 import Filter from "..";
 
 describe('Filter Component', () => {
+  // eslint-disable-next-line testing-library/no-render-in-setup
+  beforeEach(() => render(<Filter filters={{}} setFilters={() => {}} />))
   test('should be able to change value of favorite select', () => {
-    render(<Filter />);
-
     const filterFavorite = screen.getByTestId('filter-favorite'); 
 
     expect(filterFavorite.value).toBe('any')
@@ -19,8 +19,6 @@ describe('Filter Component', () => {
   });
 
   test('should be able to change value of gender select', () => {
-    render(<Filter />);
-
     const filterFavorite = screen.getByTestId('filter-gender'); 
 
     expect(filterFavorite.value).toBe('any')
