@@ -17,8 +17,6 @@ const Pets = (props) => {
     gender: 'any',
     favoured: 'any'
   });
-
-  console.log(cats);
   
   useEffect(() => {
     fetchCats()
@@ -52,7 +50,7 @@ const Pets = (props) => {
     <>
       {
         cats && (
-          <PetsContext.Provider value={{cats: filteredCats}}>
+          <PetsContext.Provider value={{cats: filteredCats, setCats}}>
             <Container className='p-5'>
               <Row>
                 <Col sm={4}>

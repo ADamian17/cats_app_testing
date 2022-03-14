@@ -1,6 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
+import { PetsContext } from '../../Pets';
+import cats from '../../../mocks/cats.json';
+
 import CardComponent from "..";
 
 describe('Card Component', () => {
@@ -16,20 +19,27 @@ describe('Card Component', () => {
     favoured: false,
     updateFavorite: () => {}
   }
+
+  const setupWithProvider = (props) => render(
+    <PetsContext.Provider value={{cats, setCats: () => {}}}>
+      <CardComponent {...props} />
+    </PetsContext.Provider>
+  )
+
   test('should show card heading', () => {
-    render(<CardComponent {...cardProps} />)
+    setupWithProvider(cardProps); 
 
     expect(screen.getByTestId('card-heading')).toBeInTheDocument();
-  }); 
+  });
 
   test('should show card subheading', () => {
-    render(<CardComponent {...cardProps} />)
+    setupWithProvider(cardProps); 
 
     expect(screen.getByTestId('card-subheading')).toBeInTheDocument();
   });
 
   test('should show card email', () => {
-    render(<CardComponent {...cardProps} />)
+    setupWithProvider(cardProps); 
 
     expect(screen.getByTestId('card-copy')).toBeInTheDocument();
   });
@@ -39,7 +49,7 @@ describe('Card Component', () => {
 
     beforeEach(() => {
       // eslint-disable-next-line testing-library/no-render-in-setup
-      render(<CardComponent {...cardProps} />)
+      setupWithProvider(cardProps); 
       image = screen.getByTestId('card-image');
     });
 
@@ -58,20 +68,20 @@ describe('Card Component', () => {
 
   describe('Btn Favoured', () => {
     test('should show heart outline default', () => {
-      render(<CardComponent {...cardProps} />)
+      setupWithProvider(cardProps); 
 
       expect(screen.queryByTestId('card-btn-fav-heart-red')).not.toBeInTheDocument();
       expect(screen.getByTestId('card-btn-fav-heart')).toBeInTheDocument()
     });
 
     test('should show heart outline red', () => {
-      render(<CardComponent {...cardProps} favoured={true} />)
+      setupWithProvider({...cardProps, favoured: true}); 
 
       expect(screen.getByTestId('card-btn-fav-heart-red')).toBeInTheDocument();
       expect(screen.queryByTestId('card-btn-fav-heart')).not.toBeInTheDocument();
     });
     test('should toggle heart status', () => {
-      render(<CardComponent {...cardProps} />)
+      setupWithProvider(cardProps); 
 
       userEvent.click(screen.getByTestId('card-btn-fav'))
 
